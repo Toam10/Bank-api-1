@@ -26,13 +26,20 @@ const checkForDuplicates = (data, id) => {
 const getUser = (id) => {
   const data = getDataFromDatabase();
   const user = data.find((user) => user.id === id);
+  if (!user) {
+    const error = new Error("User not found");
+    error.code = 404;
+    throw error;
+  }
   return user;
 };
 
 const addUser = ({ id, cash = 0, credit = 0 } = {}) => {
   const data = getDataFromDatabase();
   if (checkForDuplicates(data, id)) {
-    return false;
+    const err = new Error("User already exists !");
+    err.code = 400;
+    throw err;
   }
   credit = credit < 0 ? 0 : credit;
   const user = { id, cash, credit };
