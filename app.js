@@ -11,12 +11,23 @@ app.post("/users", (req, res) => {
   const action = req.query.action;
   const data = req.body;
   switch (action) {
-    case "getUser":
-      const user = getUser(data.id);
-      return res.send(user);
     case "addUser":
       const message = addUser(data);
       return res.send(message);
+    default:
+      return res.send("Action does not exist!");
+  }
+});
+
+// Get actions are defined in GET
+
+app.get("/users", (req, res) => {
+  const action = req.query.action;
+  const data = req.body;
+  switch (action) {
+    case "getUser":
+      const user = getUser(data.id);
+      return res.send(user);
     default:
       return res.send("Action does not exist!");
   }
