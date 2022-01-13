@@ -1,5 +1,5 @@
 const express = require("express");
-const { addUser, getUser, getDataFromDatabase } = require("./users");
+const { addUser, getUser, getDataFromDatabase, deposit, updateCredit } = require("./users");
 
 const app = express();
 
@@ -21,11 +21,14 @@ app.put("/actions/:action/:id", (req, res) => {
   try {
     const action = req.params.action;
     const id = req.params.id;
+    const data = req.body;
     switch (action) {
       case "deposit":
-        return res.send(action);
+        deposit(id, data.amount);
+        return res.status(200).send({ message: `${data.amount} added to ${id} deposit` });
       case "updatecredit":
-        return res.send(action);
+        updateCredit(id, data.amount);
+        return res.status(200).send({ message: `${id} credit is now ${data.amount}` });
       case "withdraw":
         return res.send(action);
       case "transfer":
