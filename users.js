@@ -26,20 +26,19 @@ const checkForDuplicates = (data, id) => {
 const getUser = (id) => {
   const data = getDataFromDatabase();
   const user = data.find((user) => user.id === id);
-  return user ? user : "User does not exist";
+  return user;
 };
 
 const addUser = ({ id, cash = 0, credit = 0 } = {}) => {
   const data = getDataFromDatabase();
   if (checkForDuplicates(data, id)) {
-    return "User already in database";
+    return false;
   }
   credit = credit < 0 ? 0 : credit;
-  console.log(data);
   const user = { id, cash, credit };
   data.push(user);
   writeToDatabase(data);
   return id + " added";
 };
 
-module.exports = { addUser, getUser };
+module.exports = { addUser, getUser, getDataFromDatabase };
