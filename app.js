@@ -1,5 +1,5 @@
 const express = require("express");
-const { addUser, getUser, getDataFromDatabase, deposit, updateCredit } = require("./users");
+const { addUser, getUser, getDataFromDatabase, deposit, updateCredit, withdraw, transfer } = require("./users");
 
 const app = express();
 
@@ -30,9 +30,11 @@ app.put("/actions/:action/:id", (req, res) => {
         updateCredit(id, data.amount);
         return res.status(200).send({ message: `${id} credit is now ${data.amount}` });
       case "withdraw":
-        return res.send(action);
+        withdraw(id, data.amount);
+        return res.status(200).send({ message: `${id} has successfully withdraw ${data.amount}` });
       case "transfer":
-        return res.send(action);
+        transfer(id, data.id, data.amount);
+        return res.status(200).send(`${id} has successfully transferred ${data.amount} to ${data.id}`);
       default:
         const error = new Error("Action does not exists");
         error.code(404);
