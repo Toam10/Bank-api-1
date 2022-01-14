@@ -120,4 +120,14 @@ const transfer = (giverId, receiverId, amount) => {
   writeToDatabase(data);
 };
 
-module.exports = { addUser, getUser, getDataFromDatabase, deposit, updateCredit, withdraw, transfer };
+const filterByAmount = (amount) => {
+  if (!validator.isNumeric(amount.toString()) || +amount < 0) {
+    const err = new Error("Invalid amount");
+    err.code = 400;
+    throw err;
+  }
+  const data = getDataFromDatabase();
+  return data.filter((user) => user.cash >= +amount);
+};
+
+module.exports = { addUser, getUser, getDataFromDatabase, deposit, updateCredit, withdraw, transfer, filterByAmount };

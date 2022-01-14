@@ -1,5 +1,14 @@
 const express = require("express");
-const { addUser, getUser, getDataFromDatabase, deposit, updateCredit, withdraw, transfer } = require("./users");
+const {
+  addUser,
+  getUser,
+  getDataFromDatabase,
+  deposit,
+  updateCredit,
+  withdraw,
+  transfer,
+  filterByAmount,
+} = require("./users");
 
 const app = express();
 
@@ -55,6 +64,10 @@ app.get("/users/:id", (req, res) => {
 
 app.get("/users", (req, res) => {
   try {
+    if (req.query.amount) {
+      const filteredData = filterByAmount(req.query.amount);
+      return res.status(200).send(filteredData);
+    }
     const data = getDataFromDatabase();
     return res.status(200).send(data);
   } catch (err) {
