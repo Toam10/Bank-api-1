@@ -5,8 +5,6 @@ const app = express();
 
 app.use(express.json());
 
-// CRUD actions are all defined in POST
-
 app.post("/users", (req, res) => {
   try {
     const data = req.body;
@@ -44,8 +42,6 @@ app.put("/actions/:action/:id", (req, res) => {
     res.status(err.code).send({ message: err.message });
   }
 });
-
-// Get actions are defined in GET
 
 app.get("/users/:id", (req, res) => {
   try {
