@@ -28,10 +28,10 @@ app.post("/users", (req, res) => {
   }
 });
 
-app.put("/actions/:action/:id", (req, res) => {
+app.put("/actions/", (req, res) => {
   try {
-    const action = req.params.action;
-    const id = req.params.id;
+    const action = req.query.action;
+    const id = req.query.id;
     const data = req.body;
     switch (action) {
       case "deposit":
