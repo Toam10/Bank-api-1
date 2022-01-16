@@ -131,4 +131,6 @@ const filterByAmount = (amount) => {
   return data.filter((user) => user.cash >= +amount);
 };
 
+// your functions is good  and clean but please but that code should hold the req and res you dont make it better when you do it like that and because of that it become unreadable ):
+// but I love they way you write you code this is the good thing (:
 module.exports = { addUser, getUser, getDataFromDatabase, deposit, updateCredit, withdraw, transfer, filterByAmount };
