@@ -55,6 +55,7 @@ app.put("/actions/", (req, res) => {
     res.status(err.code).send({ message: err.message });
   }
 });
+// you know what i think about this we talk about that and if not I make a 3 more function here and not this big function that do a multiple things
 
 app.get("/users/:id", (req, res) => {
   try {
@@ -82,3 +83,5 @@ app.get("/users", (req, res) => {
 app.listen(port, () => {
   console.log("Server is running at port " + port);
 });
+
+// good but you could move it to controllers but that ok for now
