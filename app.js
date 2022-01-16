@@ -13,6 +13,8 @@ const {
 
 const app = express();
 
+const port = process.env.PORT || 8080;
+
 app.use(express.json());
 app.use(cors());
 
@@ -77,6 +79,6 @@ app.get("/users", (req, res) => {
   }
 });
 
-app.listen(8080, () => {
-  console.log("Server is up at port 8080");
+app.listen(port, () => {
+  console.log("Server is up at port " + port);
 });
